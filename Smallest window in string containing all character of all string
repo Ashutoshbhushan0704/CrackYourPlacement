@@ -1,11 +1,44 @@
- while (count == m && left <= right) {
+
+ 
+
+class Solution
+{
+    //Function to find the smallest window in the string s consisting
+    //of all the characters of string p.
+    public static String smallestWindow(String s, String p)
+    {
+        
+        // Your code here
+        int n = s.length();
+         int m = p.length();
+         if(m>n){
+             return "-1";
+         }
+         int [] freq = new int [26];
+         int[] freqp = new int [26];
+         
+         for(int i = 0; i<m; i++){
+             freqp[p.charAt(i) - 'a']++;
+         }
+         int left = 0; int right = 0;
+         int count = 0;
+         int minlength = n+1;
+         int minleft = -1;
+         
+         while(right<n){
+             freq[s.charAt(right) - 'a']++;
+             if(freq[s.charAt(right)- 'a']<=freqp[s.charAt(right)-'a']){
+                 count++;
+             }
+             
+     while (count == m && left <= right) {
                 int length = right - left + 1;
-                if (length < minLength) {
-                    minLength = length;
-                    minLeft = left;
+                if (length < minlength) {
+                    minlength = length;
+                    minleft = left;
                 }
-                freqS[S.charAt(left) - 'a']--;
-                if (freqS[S.charAt(left) - 'a'] < freqP[S.charAt(left) - 'a']) {
+                freq[s.charAt(left) - 'a']--;
+                if (freq[s.charAt(left) - 'a'] < freqp[s.charAt(left) - 'a']) {
                     count--;
                 }
                 left++;
@@ -13,10 +46,10 @@
             right++;
         }
 
-        if (minLeft == -1) {
+        if (minleft == -1) {
             return "-1"; // No window was found
         } else {
-            return S.substring(minLeft, minLeft + minLength);
+            return s.substring(minleft, minleft + minlength);
         }
     }
 
