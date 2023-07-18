@@ -1,0 +1,24 @@
+ while (count == m && left <= right) {
+                int length = right - left + 1;
+                if (length < minLength) {
+                    minLength = length;
+                    minLeft = left;
+                }
+                freqS[S.charAt(left) - 'a']--;
+                if (freqS[S.charAt(left) - 'a'] < freqP[S.charAt(left) - 'a']) {
+                    count--;
+                }
+                left++;
+            }
+            right++;
+        }
+
+        if (minLeft == -1) {
+            return "-1"; // No window was found
+        } else {
+            return S.substring(minLeft, minLeft + minLength);
+        }
+    }
+
+}
+ 
